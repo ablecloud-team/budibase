@@ -28,17 +28,17 @@
 
 <Layout gap="XS" noPadding>
   <Input
-    label="Password"
+    label="비밀번호"
     type="password"
     error={$firstTouched && $passwordError}
     bind:value={$firstPassword}
   />
   <Input
-    label="Repeat Password"
+    label="비밀번호 확인"
     type="password"
     error={$repeatTouched &&
       $firstPassword !== $repeatPassword &&
-      "Passwords must match"}
+      "비밀번호가 일치하지 않습니다."}
     bind:value={$repeatPassword}
   />
 </Layout>

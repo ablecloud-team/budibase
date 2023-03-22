@@ -62,7 +62,7 @@ export const login = async (ctx: Ctx<LoginRequest>, next: any) => {
 
   const user = await userSdk.getUserByEmail(email)
   if (user && (await userSdk.isPreventPasswordActions(user))) {
-    ctx.throw(403, "Invalid credentials")
+    ctx.throw(403, "정상적으로 로그인할 수 없습니다.")
   }
 
   return passport.authenticate(
@@ -81,7 +81,7 @@ export const logout = async (ctx: any) => {
   if (ctx.user && ctx.user._id) {
     await authSdk.logout({ ctx, userId: ctx.user._id })
   }
-  ctx.body = { message: "User logged out." }
+  ctx.body = { message: "사용자가 로그아웃했습니다." }
 }
 
 // INIT
@@ -112,7 +112,7 @@ export const reset = async (ctx: Ctx<PasswordResetRequest>) => {
   await authSdk.reset(email)
 
   ctx.body = {
-    message: "Please check your email for a reset link.",
+    message: "재설정 링크는 이메일을 확인하십시오.",
   }
 }
 
@@ -124,12 +124,12 @@ export const resetUpdate = async (ctx: Ctx<PasswordResetUpdateRequest>) => {
   try {
     await authSdk.resetUpdate(resetCode, password)
     ctx.body = {
-      message: "password reset successfully.",
+      message: "비밀번호가 성공적으로 재설정되었습니다.",
     }
   } catch (err) {
     console.warn(err)
     // hide any details of the error for security
-    ctx.throw(400, "Cannot reset password.")
+    ctx.throw(400, "비밀번호를 재설정할 수 없습니다.")
   }
 }
 

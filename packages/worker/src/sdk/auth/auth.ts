@@ -46,7 +46,7 @@ export const reset = async (email: string) => {
   const configured = await emails.isEmailConfigured()
   if (!configured) {
     throw new HTTPError(
-      "Please contact your platform administrator, SMTP is not configured.",
+      "플랫폼 관리자에게 문의하세요. SMTP가 구성되지 않았습니다.",
       400
     )
   }
@@ -65,7 +65,7 @@ export const reset = async (email: string) => {
   // send password reset
   await emails.sendEmail(email, EmailTemplatePurpose.PASSWORD_RECOVERY, {
     user,
-    subject: "{{ company }} platform password reset",
+    subject: "{{ company }} Partner Management 비밀번호 재설정 안내입니다.",
   })
   await events.user.passwordResetRequested(user)
 }
