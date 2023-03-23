@@ -32,13 +32,13 @@
         $goto("../portal/")
       } else {
         await auth.resetPassword(formData.password, resetCode)
-        notifications.success("Password reset successfully")
+        notifications.success("비밀번호 재설정을 완료하였습니다.")
         // send them to login if reset successful
         $goto("./login")
       }
     } catch (err) {
       submitted = false
-      notifications.error("Unable to reset password")
+      notifications.error("비밀번호 재설정 오류입니다.")
     }
   }
 
@@ -59,14 +59,14 @@
       <img alt="logo" src={$organisation.logoUrl || Logo} />
     {/if}
     <Layout gap="XS" noPadding>
-      <Heading size="M">Reset your password</Heading>
-      <Body size="M">Please enter the new password you'd like to use.</Body>
+      <Heading size="M">비밀번호 초기화</Heading>
+      <Body size="M">새 비밀번호를 입력하세요.</Body>
     </Layout>
 
     <Layout gap="S" noPadding>
       <FancyForm bind:this={form}>
         <FancyInput
-          label="Password"
+          label="비밀번호"
           value={formData.password}
           type="password"
           on:change={e => {
@@ -79,7 +79,7 @@
             let fieldError = {}
 
             fieldError["password"] = !formData.password
-              ? "Please enter a password"
+              ? "비밀번호를 입력하세요."
               : undefined
 
             fieldError["confirmationPassword"] =
@@ -87,7 +87,7 @@
                 formData.password,
                 formData.confirmationPassword
               ) && formData.confirmationPassword
-                ? "Passwords must match"
+                ? "비밀번호가 일치해야 합니다."
                 : undefined
 
             errors = handleError({ ...errors, ...fieldError })
@@ -96,7 +96,7 @@
           disabled={submitted}
         />
         <FancyInput
-          label="Repeat Password"
+          label="비밀번호 확인"
           value={formData.confirmationPassword}
           type="password"
           on:change={e => {
@@ -113,7 +113,9 @@
               ) && formData.password
 
             let fieldError = {
-              confirmationPassword: isValid ? "Passwords must match" : null,
+              confirmationPassword: isValid
+                ? "비밀번호가 일치해야 합니다."
+                : null,
             }
 
             errors = handleError({ ...errors, ...fieldError })
@@ -128,7 +130,7 @@
         disabled={Object.keys(errors).length > 0 ||
           (forceResetPassword ? false : !resetCode)}
         cta
-        on:click={reset}>Reset your password</Button
+        on:click={reset}>비밀번호 재설정</Button
       >
     </div>
   </Layout>

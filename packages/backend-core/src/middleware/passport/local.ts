@@ -4,8 +4,8 @@ import * as users from "../../users"
 import { authError } from "./utils"
 import { BBContext } from "@budibase/types"
 
-const INVALID_ERR = "Invalid credentials"
-const EXPIRED = "This account has expired. Please reset your password"
+const INVALID_ERR = "정상적으로 로그인할 수 없습니다."
+const EXPIRED = "이 계정은 만료되었습니다. 비밀번호를 재설정하세요"
 
 export const options = {
   passReqToCallback: true,

@@ -41,11 +41,11 @@
       if ($auth?.user?.forceResetPassword) {
         $goto("./reset")
       } else {
-        notifications.success("Logged in successfully")
+        notifications.success("성공적으로 로그인했습니다.")
         $goto("../portal")
       }
     } catch (err) {
-      notifications.error(err.message ? err.message : "Invalid credentials")
+      notifications.error(err.message ? err.message : "정상적으로 로그인할 수 없습니다.")
     }
   }
 
@@ -71,20 +71,20 @@
       {#if loaded}
         <img alt="logo" src={$organisation.logoUrl || Logo} />
       {/if}
-      <Heading size="M">Log in to Budibase</Heading>
+      <Heading size="M">ABLECLOUD 파트너 관리</Heading>
     </Layout>
     <Layout gap="S" noPadding>
       {#if loaded && ($organisation.google || $organisation.oidc)}
         <FancyForm>
           <OIDCButton oidcIcon={$oidc.logo} oidcName={$oidc.name} />
-          <GoogleButton />
+          <!-- <GoogleButton /> -->
         </FancyForm>
       {/if}
       {#if !$organisation.isSSOEnforced}
         <Divider />
         <FancyForm bind:this={form}>
           <FancyInput
-            label="Your work email"
+            label="이메일을 입력해주세요."
             value={formData.username}
             on:change={e => {
               formData = {
@@ -95,7 +95,7 @@
             validate={() => {
               let fieldError = {
                 username: !formData.username
-                  ? "Please enter a valid email"
+                  ? "유효한 이메일을 입력해주세요."
                   : undefined,
               }
               errors = handleError({ ...errors, ...fieldError })
@@ -103,7 +103,7 @@
             error={errors.username}
           />
           <FancyInput
-            label="Password"
+            label="비밀번호를 입력해주세요."
             value={formData.password}
             type="password"
             on:change={e => {
@@ -115,7 +115,7 @@
             validate={() => {
               let fieldError = {
                 password: !formData.password
-                  ? "Please enter your password"
+                  ? "올바른 비밀번호를 입력해주세요."
                   : undefined,
               }
               errors = handleError({ ...errors, ...fieldError })
@@ -133,13 +133,13 @@
           disabled={Object.keys(errors).length > 0}
           on:click={login}
         >
-          Log in to {company}
+          로그인
         </Button>
       </Layout>
       <Layout gap="XS" noPadding justifyItems="center">
         <div class="user-actions">
           <ActionButton size="L" quiet on:click={() => $goto("./forgot")}>
-            Forgot password?
+            비밀번호를 잊으셨습니까?
           </ActionButton>
         </div>
       </Layout>

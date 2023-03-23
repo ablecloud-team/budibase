@@ -104,32 +104,32 @@
                 <Icon size="XL" name="ChevronDown" />
               </div>
               <MenuItem icon="UserEdit" on:click={() => userInfoModal.show()}>
-                My profile
+                프로필 정보
               </MenuItem>
               <MenuItem
                 icon="LockClosed"
                 on:click={() => changePasswordModal.show()}
               >
-                Update password
+                비밀번호 변경
               </MenuItem>
               {#if $auth.isBuilder}
                 <MenuItem
                   icon="UserDeveloper"
                   on:click={() => $goto("../portal")}
                 >
-                  Open developer mode
+                  개발모드로 열기
                 </MenuItem>
               {/if}
-              <MenuItem icon="LogOut" on:click={logout}>Log out</MenuItem>
+              <MenuItem icon="LogOut" on:click={logout}>로그 아웃</MenuItem>
             </ActionMenu>
           </div>
           <Layout noPadding gap="XS">
             <Heading size="M">
-              Hey {$auth.user.firstName || $auth.user.email}
+              {$auth.user.firstName || $auth.user.email} 님 환영합니다.
             </Heading>
             <Body>
-              Welcome to the {$organisation.company} portal. Below you'll find the
-              list of apps that you have access to.
+              {$organisation.company} 파트너 관리에 오신 것을 환영합니다. 아래에서
+              액세스할 수 있는 앱 목록을 찾을 수 있습니다.
             </Body>
           </Layout>
           <Divider />
@@ -138,13 +138,13 @@
               <Layout gap="S" justifyItems="center">
                 <img class="spaceman" alt="spaceman" src={Spaceman} />
                 <Heading size="M">
-                  {"Your apps are currently offline."}
+                  {"앱이 현재 오프라인 상태입니다."}
                 </Heading>
-                Please contact the account holder to get them back online.
+                다시 온라인 상태로 되돌리려면 계정 소유자에게 문의하십시오.
               </Layout>
             </div>
           {:else if userApps.length}
-            <Heading>Apps</Heading>
+            <Heading>앱 목록</Heading>
             <div class="group">
               <Layout gap="S" noPadding>
                 {#each userApps as app, idx (app.appId)}
@@ -155,7 +155,7 @@
                       <Body size="S">
                         {#if app.updatedAt}
                           {processStringSync(
-                            "Updated {{ duration time 'millisecond' }} ago",
+                            "{{ duration time 'millisecond' }} 전 업데이트 됨",
                             {
                               time:
                                 new Date().getTime() -
@@ -163,7 +163,7 @@
                             }
                           )}
                         {:else}
-                          Never updated
+                          업데이트 없음.
                         {/if}
                       </Body>
                     </div>
@@ -174,9 +174,10 @@
             </div>
           {:else}
             <Layout gap="XS" noPadding>
-              <Heading size="S">You don't have access to any apps yet.</Heading>
+              <Heading size="S">현재 접근할 수 있는 앱 목록이 없습니다.</Heading
+              >
               <Body size="S">
-                The apps you have access to will be listed here.
+                접근 권한이 있는 앱 목록이 아래에 나열됩니다.
               </Body>
             </Layout>
           {/if}

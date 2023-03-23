@@ -27,10 +27,10 @@
     submitted = true
     try {
       await auth.forgotPassword(email)
-      notifications.success("Email sent - please check your inbox")
+      notifications.success("이메일을 보냈습니다 - 받은 편지함을 확인하십시오")
     } catch (err) {
       submitted = false
-      notifications.error("Unable to send reset password link")
+      notifications.error("비밀번호 재설정 링크를 보낼 수 없습니다.")
     }
   }
 
@@ -52,28 +52,27 @@
           <span class="back-chev" on:click={() => $goto("../")}>
             <Icon name="ChevronLeft" size="XL" />
           </span>
-          Forgot your password?
+          비밀번호를 잊으셨습니까?
         </div>
       </Heading>
     </span>
     <Layout gap="XS" noPadding>
       <Body size="M">
-        No problem! Just enter your account's email address and we'll send you a
-        link to reset it.
+        계정의 이메일 주소를 입력하면 재설정 링크를 보내드립니다.
       </Body>
     </Layout>
 
     <Layout gap="S" noPadding>
       <FancyForm bind:this={form}>
         <FancyInput
-          label="Email"
+          label="이메일을 입력해주세요."
           value={email}
           on:change={e => {
             email = e.detail
           }}
           validate={() => {
             if (!email) {
-              return "Please enter your email"
+              return "이메일을 입력해주세요."
             }
             return null
           }}
@@ -89,7 +88,7 @@
         cta
         on:click={forgot}
       >
-        Reset password
+        비밀번호 재설정
       </Button>
     </div>
   </Layout>

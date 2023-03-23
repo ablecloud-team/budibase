@@ -19,7 +19,7 @@
   .split-page {
     height: 100%;
     display: grid;
-    grid-template-columns: max(50%, 380px) 1fr;
+    grid-template-columns: max(100%, 380px) 1fr;
     justify-content: stretch;
     overflow: hidden;
   }

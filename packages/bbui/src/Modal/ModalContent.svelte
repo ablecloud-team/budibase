@@ -9,8 +9,8 @@
 
   export let title = undefined
   export let size = "S"
-  export let cancelText = "Cancel"
-  export let confirmText = "Confirm"
+  export let cancelText = "취소"
+  export let confirmText = "확인"
   export let showCancelButton = true
   export let showConfirmButton = true
   export let showCloseIcon = true
